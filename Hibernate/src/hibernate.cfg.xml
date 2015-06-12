@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+  <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+  <property name="hibernate.connection.password">hr</property>
+  <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+  <property name="hibernate.connection.username">HR</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+  <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.connection.pool_size">1</property>
+  <property name="hibernate.default_schema">HR</property>
+  <mapping resource="entities/Employees.hbm.xml"/>
+  <mapping resource="entities/Departments.hbm.xml"/>
+  <mapping resource="entities/JobHistory.hbm.xml"/>
+  <mapping resource="entities/Jobs.hbm.xml"/>
+  <mapping resource="entities/EmpDetailsView.hbm.xml"/>
+  <mapping resource="entities/Locations.hbm.xml"/>
+  <mapping resource="entities/Countries.hbm.xml"/>
+  <mapping resource="entities/Regions.hbm.xml"/>
+ </session-factory>
+</hibernate-configuration>
