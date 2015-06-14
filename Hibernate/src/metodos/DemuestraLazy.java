@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.cache.spi.Region;
-
 import entities.Countries;
 import entities.Regions;
 
@@ -18,11 +15,11 @@ public class DemuestraLazy {
 		// TODO Auto-generated constructor stub
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void mostrarPaises() {
 		
 		Session s = ConectaDB.getSesion();
 		try {
-		Transaction t = s.beginTransaction();
 		List<Regions> lr = s.createSQLQuery("SELECT * FROM regions").addEntity(Regions.class).list();
 		Iterator<Regions> it = lr.iterator();
 		while (it.hasNext()) {

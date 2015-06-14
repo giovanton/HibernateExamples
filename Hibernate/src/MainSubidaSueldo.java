@@ -1,20 +1,24 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 
-import metodos.ConsultaSalariosVentas;
-import metodos.DemuestraLazy;
-import metodos.SubidaSueldos;
 import entities.Employees;
+import metodos.ListaEmpleadosMejorPagados;
+import metodos.SubidaSueldos;
 
 
 public class MainSubidaSueldo {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		SubidaSueldos su = new SubidaSueldos();
-		su.aumentarSueldo();
+	
+		/*SubidaSueldos su = new SubidaSueldos();
+		su.aumentarSueldo();*/
+		
+		ListaEmpleadosMejorPagados lemp = new ListaEmpleadosMejorPagados();
+		Iterator it = lemp.listarEmpleadosMejorPagados().iterator();
 
-
+		while (it.hasNext()) {
+			Employees e = (Employees) it.next();
+			System.out.println(e.getFirstName() + " " + e.getSalary());
+		}
 	}
 
 }

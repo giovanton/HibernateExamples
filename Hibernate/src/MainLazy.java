@@ -5,18 +5,16 @@ import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 import entities.Countries;
 import entities.Regions;
-import metodos.ConectaDB;
-import metodos.DemuestraLazy;
 
 
 public class MainLazy {
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Set<Countries> paises = null;
@@ -27,7 +25,6 @@ public class MainLazy {
 		Session sesion = factory.openSession();
 		paises = new HashSet<Countries>();
 			try {
-			Transaction t = sesion.beginTransaction();
 			List<Regions> lr = sesion.createSQLQuery("SELECT * FROM regions").addEntity(Regions.class).list();
 			Iterator<Regions> it = lr.iterator();
 			while (it.hasNext()) {

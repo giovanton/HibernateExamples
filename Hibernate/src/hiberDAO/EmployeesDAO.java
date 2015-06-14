@@ -2,12 +2,9 @@ package hiberDAO;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import entities.Employees;
 
-public class EmployeesDAO extends EmployeesP implements InterfaceDAO{
+public class EmployeesDAO extends GenericDAO implements InterfaceDAO{
 	
 
 	public EmployeesDAO() {
@@ -16,17 +13,13 @@ public class EmployeesDAO extends EmployeesP implements InterfaceDAO{
 	/* (non-Javadoc)
 	 * @see hiberDAO.InterfaceDAO#consultarEmpleados()
 	 */
-	@Override
-	public void setSesion(Session s) {
-		// TODO Auto-generated method stub
-		super.setSesion(s);
-	}
-	
+
 	@Override
 	public List<Employees> consultarTodo(){ 
 		
-	
-		List<Employees> les = sesion.createSQLQuery("SELECT * FROM employees WHERE department_id=80").addEntity(Employees.class).list();
+		
+		@SuppressWarnings("unchecked")
+		List<Employees> les = sesion.createSQLQuery("SELECT * FROM employees").addEntity(Employees.class).list();
 		
 		return les;
 	}
@@ -35,8 +28,24 @@ public class EmployeesDAO extends EmployeesP implements InterfaceDAO{
 	 * @see hiberDAO.InterfaceDAO#modificarEmpleados(entities.Employees)
 	 */
 	@Override
-	public void modificar(Employees e) {
-
+	public void modificar(Object o) {
+		
+		Employees e = (Employees)o;
 			sesion.merge(e);
+	}
+
+	@Override
+	public Object leerRegistro(int id) {
+	
+		Employees e = (Employees) sesion.get(Employees.class, id);
+		return e;
+	}
+
+	public List<Employees> consultarPor(String campo,int id) {
+		// TODO Auto-generated method stub
+		@SuppressWarnings("unchecked")
+		List <Employees> l = sesion.createSQLQuery("SELECT * FROM employees where " + campo + " = " + id).addEntity(Employees.class).list();
+		
+		return l;
 	}
 }
