@@ -21,8 +21,9 @@ public class DepartmentsDAO extends GenericDAO implements InterfaceDAO {
 
 	@Override
 	public Object leerRegistro(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Integer i = id;
+		Departments dep = (Departments)sesion.get(Departments.class, i.shortValue());
+		return dep;
 	}
 
 }

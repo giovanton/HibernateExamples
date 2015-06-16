@@ -6,8 +6,9 @@ import hiberDAO.GenericDAO;
 import hiberDAO.InterfaceDAO;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
@@ -20,13 +21,12 @@ import entities.Employees;
 public class ListaEmpleadosMejorPagados {
 	private static Logger log = Logger.getLogger("dblog");
 	private InterfaceDAO ddao = null;
-	private InterfaceDAO edao = null;
 	private Transaction t = null;
 	private Session se = null;
 	
 	public ListaEmpleadosMejorPagados() {
 		ddao = new DepartmentsDAO();
-		edao = new EmployeesDAO();
+		new EmployeesDAO();
 	}
 	@SuppressWarnings("unchecked")
 	private List<Departments> listarDepartamentos() {
@@ -42,8 +42,8 @@ public class ListaEmpleadosMejorPagados {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Employees> listarEmpleadosMejorPagados() {
-		List<Employees> lemp = new ArrayList<Employees>();
+	public Set<Employees> listarEmpleadosMejorPagados() {
+		Set<Employees> lemp = new HashSet<Employees>();
 		try {
 		se = ConectaDB.getSesion();
 		((GenericDAO) ddao).setSesion(se);
@@ -55,16 +55,17 @@ public class ListaEmpleadosMejorPagados {
 			TreeMap<Integer, Employees> empleadosOrdenados = 
 					new TreeMap<Integer, Employees>();
 			ltemp.addAll(d.getEmployeeses());
-			for (Employees e : ltemp) {
-				if (ltemp.size() >= 1)
-				empleadosOrdenados.put(e.getSalary().intValue(), e);
-
-			if (empleadosOrdenados.size() >= 1) {
+			for (Employees emp:ltemp) {
+				empleadosOrdenados.put(emp.getSalary().intValue(), emp);
+				//System.out.println(emp.getFirstName() + " " + emp.getSalary());
+		    }
+			if (!empleadosOrdenados.isEmpty()) {
+				/*int indexEO = empleadosOrdenados.lastKey();
+				System.out.println(indexEO);*/
 			lemp.add((Employees) empleadosOrdenados.get(empleadosOrdenados.lastKey()));
 			} else {
-				lemp.add(empleadosOrdenados.get(0));
+				System.out.println("no hay empleados en este departamento");
 			}
-		}
 		}
 		t.commit();
 		} catch (Exception e) {
@@ -73,6 +74,7 @@ public class ListaEmpleadosMejorPagados {
 			throw e;
 		} finally {
 			ConectaDB.cerrarSesion(se);
+			System.out.println("Sesión finalizada.");
 		}	
 		return lemp;
 	}

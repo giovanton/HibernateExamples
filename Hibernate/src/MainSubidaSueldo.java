@@ -1,4 +1,7 @@
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import entities.Employees;
 import metodos.ListaEmpleadosMejorPagados;
@@ -13,7 +16,8 @@ public class MainSubidaSueldo {
 		su.aumentarSueldo();*/
 		
 		ListaEmpleadosMejorPagados lemp = new ListaEmpleadosMejorPagados();
-		Iterator it = lemp.listarEmpleadosMejorPagados().iterator();
+		Set<Employees> le = lemp.listarEmpleadosMejorPagados();
+		Iterator it = le.iterator();
 
 		while (it.hasNext()) {
 			Employees e = (Employees) it.next();
