@@ -173,6 +173,6 @@ public class Employees implements java.io.Serializable ,Comparable<Employees>{
 	}
 	
 	public int compareTo(Employees o) {
-	return o.salary.compareTo(this.salary);
+	return (o.salary).compareTo(this.salary);
 	}
 }
