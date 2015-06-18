@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
                                          "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
- <session-factory>
+ <session-factory name="">
   <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
   <property name="hibernate.connection.password">hr</property>
   <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
@@ -10,13 +10,14 @@
   <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
   <property name="hibernate.show_sql">true</property>
   <property name="hibernate.connection.pool_size">1</property>
-  <mapping resource="entities/Employees.hbm.xml"/>
-  <mapping resource="entities/Departments.hbm.xml"/>
-  <mapping resource="entities/JobHistory.hbm.xml"/>
-  <mapping resource="entities/Jobs.hbm.xml"/>
-  <mapping resource="entities/EmpDetailsView.hbm.xml"/>
-  <mapping resource="entities/Locations.hbm.xml"/>
-  <mapping resource="entities/Countries.hbm.xml"/>
-  <mapping resource="entities/Regions.hbm.xml"/>
+  <property name="hibernate.default_schema">HR</property>
+  <mapping class="entidades.Employees" resource="entidades/Employees.hbm.xml"/>
+  <mapping resource="entidades/Countries.hbm.xml"/>
+  <mapping resource="entidades/Departments.hbm.xml"/>
+  <mapping resource="entidades/EmpDetailsView.hbm.xml"/>
+  <mapping resource="entidades/JobHistory.hbm.xml"/>
+  <mapping resource="entidades/Locations.hbm.xml"/>
+  <mapping resource="entidades/Regions.hbm.xml"/>
+  <mapping resource="entidades/Jobs.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>
